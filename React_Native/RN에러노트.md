@@ -13,7 +13,7 @@
 - useState 사용시, 최초랜더링시 default값을 전달하게 되는데 그것이 잘못되었을경우 나는 에러라고 한다.
 - [https://reactnativeseoul.org/t/malformed-calls-from-js-field-sizes-are-different/1127](https://reactnativeseoul.org/t/malformed-calls-from-js-field-sizes-are-different/1127)
 
-![캡처.PNG](assets/%EC%BA%A1%EC%B2%98.png)
+![캡처.PNG](https://user-images.githubusercontent.com/86242930/184551182-e0a377ba-5a1c-427f-bd3c-ff05ff6828b0.png)
 
 - HomeChart.js 에서 DrawChart.js 로 props를 전달하는 과정에서, 빈값이 전달되어서 생긴 오류였다.
 
