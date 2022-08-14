@@ -20,6 +20,6 @@
 - Solution
     - HomeChart.js 에서 useEffect() 안에 조건문(endfetchdata)을 하나 더 달은후, fetch가 종료될경우만 값을 chartDataObj에 담게끔 설정하였다
     
-    ![캡처.PNG](assets/%EC%BA%A1%EC%B2%98 1.png)
+    ![캡처.PNG](https://user-images.githubusercontent.com/86242930/184551140-02a1902d-2494-4510-bc44-c838aedcdb8d.png)
     
     - parsing() 함수안에, obj에 값을 담는 로직 담겨져있음. 조건문이 없어서 빈값을 obj에 담았서 전달했었던 것이었음
