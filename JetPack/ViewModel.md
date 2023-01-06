@@ -319,3 +319,66 @@ class MainActivity : AppCompatActivity() {
     }
 }
 ```
+
+### ViewModelScope
+
+→ ViewModel 에서 CoroutineScope 사용시, ViewModel을 없애도(Activity를 벗어나도) 계속 진행이 된다!
+
+- ViewModel을 벗어났을때 멈춰주는작업 별도로 해줘야함.
+- **ViewModel 없어졌을때, 자동으로 멈춰지는것이 ViewModelScope**
+
+→ Activity
+
+```kotlin
+class SecondActivity : AppCompatActivity() {
+
+    lateinit var viewModel : SecondViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_second)
+
+        viewModel = ViewModelProvider(this).get(SecondViewModel::class.java)
+        viewModel.a()
+        viewModel.b()
+
+    }
+}
+```
+
+→ ViewModel
+
+```kotlin
+// https://developer.android.com/topic/libraries/architecture/coroutines?hl=ko
+
+class SecondViewModel : ViewModel() {
+
+	
+    fun a() {
+				
+				// Activity 벗어나도 계속 Log 찍힘
+
+        CoroutineScope(Dispatchers.IO).launch {
+            for(i in 0..10) {
+                delay(1000)
+                Log.d("SecondViewModel A : ", i.toString())
+            }
+        }
+
+    }
+
+    fun b(){
+
+				// Activity 벗어나면 멈춤
+
+        viewModelScope.launch {
+            for(i in 0..10) {
+                delay(1000)
+                Log.d("SecondViewModel B : ", i.toString())
+            }
+        }
+    }
+
+}
+```
