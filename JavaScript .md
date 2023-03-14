@@ -14,7 +14,8 @@
 
 - **const, var**
     - const : 고정하는 기능. 똑같다
-    - var : let과 동일한 기능. but let이 더 최신기능
+    - var : let과 동일한 기능. but let이 더 최신기능    
+    
 
 - **boolean 형**
     - 참 : 1, true
