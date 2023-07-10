@@ -25,7 +25,8 @@
 
 row 와 col 헷갈림
 
-![캡처](https://github.com/plashdof/molecatch_Kotlin/assets/86242930/21e190fc-3c6a-4499-9b6f-d1843a0c45ff)
+
+<img src="https://github.com/plashdof/molecatch_Kotlin/assets/86242930/21e190fc-3c6a-4499-9b6f-d1843a0c45ff">
 
 
 ## 학습메모
