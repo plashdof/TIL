@@ -11,8 +11,6 @@ fun main(){
     insertData(datas)
 
     printTable()
-
-
 }
 
 fun printTable(){
@@ -61,6 +59,8 @@ fun insertData(datas : ArrayList<String>){
         val arr = timeParsing(datas[i])
         val name = datas[i+1]
 
+        if(arr[0] == -1){ continue }
+
         var index = 0
         for(i in arr[1] until arr[2]+1 ){
             if(i == arr[2]){
@@ -79,6 +79,13 @@ fun timeParsing(s : String) : IntArray {
     val time = s
     val srow = time.substring(1,3).toInt() - 9
     val erow = time.substring(3,5).toInt() - 10  // 끝나는시간 전칸까지만 표시하므로 10뺴주기
+
+    // 예외처리1 & 예외처리 2
+    // 입력범위 벗어난 데이터 미반영 & 19시 넘긴데이터 미반영
+    if(erow - srow < 1 || erow - srow > 3 || time.substring(3,5).toInt() > 19){
+        return intArrayOf(-1,-1,-1)
+    }
+    
     var col = 0
     when(time[0]){
         'M' -> {col = 0}
