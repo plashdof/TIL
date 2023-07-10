@@ -1,5 +1,6 @@
 
-
+// 행 6 열 11 짜리 2차원배열 초기화
+val answer = Array(11) { Array(6) { "xxxx" } }
 
 fun main(){
     var input = readln()
@@ -7,7 +8,14 @@ fun main(){
     // 앞뒤 괄호 제거
     input = input.substring(1,input.length - 1)
     val datas = stringToArray(input)
-    print(datas)
+    insertData(datas)
+
+    for(i in 0 until 11){
+        for(j in 0 until 6){
+            print(answer[i][j])
+        }
+        println()
+    }
 
 }
 
@@ -27,3 +35,41 @@ fun stringToArray(s : String) : ArrayList<String>{
 
     return datas
 }
+
+fun insertData(datas : ArrayList<String>){
+
+    for(i in 0 until datas.size step 2){
+
+        // arr[0] : col / arr[1] : srow / arr[2] : erow
+        val arr = timeParsing(datas[i])
+        val name = datas[i+1]
+
+        var index = 0
+        for(i in arr[1] until arr[2]+1 ){
+            if(i == arr[2]){
+                answer[i][arr[0]] = "----"
+                break
+            }
+            answer[i][arr[0]] = name.substring(index,index+2)
+            index+=2
+        }
+    }
+}
+
+fun timeParsing(s : String) : IntArray {
+
+    val time = s
+    val srow = time.substring(1,3).toInt() - 9
+    val erow = time.substring(3,5).toInt() - 10  // 끝나는시간 전칸까지만 표시하므로 10뺴주기
+    var col = 0
+    when(time[0]){
+        'M' -> {col = 1}
+        'T' -> {col = 2}
+        'W' -> {col = 3}
+        'H' -> {col = 4}
+        'F' -> {col = 5}
+    }
+    return intArrayOf(col, srow, erow)
+}
+
+
