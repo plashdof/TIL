@@ -36,6 +36,7 @@ fun stringToArray(s : String) : ArrayList<String>{
     return datas
 }
 
+// 입력받은 데이터를 2차원배열에 삽입하는 함수
 fun insertData(datas : ArrayList<String>){
 
     for(i in 0 until datas.size step 2){
@@ -56,6 +57,7 @@ fun insertData(datas : ArrayList<String>){
     }
 }
 
+// 데이터중 시간데이터를, 배열포지션에 맞게 Parsing 하는 함수
 fun timeParsing(s : String) : IntArray {
 
     val time = s
