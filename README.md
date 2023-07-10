@@ -15,6 +15,19 @@
 
 ---
 
+
+
+### 배열 입력받기
+
+### 데이터 Parsing 하기
+
+### 데이터 2차원 배열에 insert 하기
+
+row 와 col 헷갈림
+
+![캡처](https://github.com/plashdof/molecatch_Kotlin/assets/86242930/21e190fc-3c6a-4499-9b6f-d1843a0c45ff)
+
+
 ## 학습메모
 
 ---
