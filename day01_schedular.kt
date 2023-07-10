@@ -1,6 +1,10 @@
 
+
 // 행 6 열 11 짜리 2차원배열 초기화
 val answer = Array(11) { Array(5) { "    " } }
+
+// 추가배열 선언
+val extras = ArrayList<Array<Array<String>>>()
 
 fun main(){
     var input = readln()
@@ -8,12 +12,43 @@ fun main(){
     // 앞뒤 괄호 제거
     input = input.substring(1,input.length - 1)
     val datas = stringToArray(input)
-    insertData(datas)
-
-    printTable()
+    parsingDatas(datas)
+    printMainTable()
+    printExtraTable()
 }
 
-fun printTable(){
+// 입력값 ArrayList로 변환해주는 함수
+fun stringToArray(s : String) : ArrayList<String>{
+
+    val arr = s.split(",")
+    val datas = ArrayList<String>()
+
+    for(i in arr){
+        // 앞뒤 공백 제거
+        var temp = i.trim()
+        // 앞뒤 따옴표 제거
+        temp = temp.substring(1,temp.length - 1)
+        datas.add(temp)
+    }
+
+    return datas
+}
+
+// extra 테이블을 출력하는 함수
+fun printExtraTable(){
+    for(extra in extras){
+        for(i in extra){
+            for(j in i){
+                print(j)
+            }
+            println()
+        }
+        println("-------------------------------")
+    }
+}
+
+// 메인 테이블을 출력하는 함수
+fun printMainTable(){
     println("|시간| 월 | 화 | 수 | 목 | 금 |")
     println("-------------------------------")
     var time = 9
@@ -33,25 +68,10 @@ fun printTable(){
 }
 
 
-// 입력값 ArrayList로 변환해주는 함수
-fun stringToArray(s : String) : ArrayList<String>{
 
-    val arr = s.split(",")
-    val datas = ArrayList<String>()
 
-    for(i in arr){
-        // 앞뒤 공백 제거
-        var temp = i.trim()
-        // 앞뒤 따옴표 제거
-        temp = temp.substring(1,temp.length - 1)
-        datas.add(temp)
-    }
-
-    return datas
-}
-
-// 입력받은 데이터를 2차원배열에 삽입하는 함수
-fun insertData(datas : ArrayList<String>){
+// 입력받은 데이터를 시간,이름 짝지어서 가공하는 함수
+fun parsingDatas(datas : ArrayList<String>){
 
     for(i in 0 until datas.size step 2){
 
@@ -60,16 +80,11 @@ fun insertData(datas : ArrayList<String>){
         val name = datas[i+1]
 
         if(arr[0] == -1){ continue }
-
-        var index = 0
-        for(i in arr[1] until arr[2]+1 ){
-            if(i == arr[2]){
-                answer[i][arr[0]] = "----"
-                break
-            }
-            answer[i][arr[0]] = name.substring(index,index+2)
-            index+=2
+        // 예외처리3 : 시간표 겹쳤을때 하단에 별도출력
+        if(checkDupli(arr,name)){
+            continue
         }
+        inputMainDatas(arr,name)
     }
 }
 
@@ -85,7 +100,7 @@ fun timeParsing(s : String) : IntArray {
     if(erow - srow < 1 || erow - srow > 3 || time.substring(3,5).toInt() > 19){
         return intArrayOf(-1,-1,-1)
     }
-    
+
     var col = 0
     when(time[0]){
         'M' -> {col = 0}
@@ -96,3 +111,54 @@ fun timeParsing(s : String) : IntArray {
     }
     return intArrayOf(col, srow, erow)
 }
+
+
+// 가공한 데이터를 이차원배열에 삽입하는 함수
+fun inputMainDatas(arr : IntArray, name : String){
+    var index = 0
+    for(i in arr[1] until arr[2]+1 ){
+
+        if(i == arr[2] || index == 4){
+            answer[i][arr[0]] = "----"
+            break
+        }
+        answer[i][arr[0]] = name.substring(index,index+2)
+        index+=2
+    }
+}
+
+
+// 중복데이터인지 체크하는 함수
+fun checkDupli(arr : IntArray, name : String) : Boolean {
+    for(i in arr[1] until arr[2]+1 ) {
+        if (answer[i][arr[0]].isNotBlank()) {
+            inputExtraDatas(arr,name)
+            return true
+        }
+    }
+    return false
+}
+
+// 중복데이터 따로 배열 만드는 함수
+fun inputExtraDatas(arr : IntArray, name : String){
+    var time = arr[1] + 9
+    val size = arr[2] - arr[1] + 1
+    val extra = Array(size) { Array(6) { "    |" } }
+    var index = 0
+    for(i in 0 until size){
+
+        if(time == 9){ extra[i][0] = "| 09 |" }
+        else{ extra[i][0] = "| $time |" }
+
+        if(i == size-1){
+            extra[i][arr[0]+1] = "----|"
+            break
+        }
+        extra[i][arr[0]+1] = name.substring(index,index+2)  + "|"
+        index+=2
+        time+=1
+    }
+    extras.add(extra)
+}
+
+
