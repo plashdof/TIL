@@ -4,7 +4,7 @@
 
 - [x]  시간 입력후 요일/시작시간/종료시간 parsing 하기
 - [x]  2차원 배열에 시간표 데이터 저장하기
-- [ ]  2차원 배열 출력함수 구현하기 (표형태)
+- [x]  2차원 배열 출력함수 구현하기 (표형태)
 - [ ]  예외처리1 : 입력범위(2 ~ 4) 벗어난 데이터 미반영
 - [ ]  예외처리2 : 19시 넘긴 데이터 미반영
 - [ ]  예외처리3 : 시간표 겹쳤을때 하단 별도출력
@@ -23,12 +23,20 @@
 
 ### 데이터 2차원 배열에 insert 하기
 
-row 와 col 헷갈림
+row 와 col 이 2차원배열에서 어떻게 적용되는지
+인덱싱할때 헷갈렸음
+
+![데이터삽입](https://github.com/plashdof/molecatch_Kotlin/assets/86242930/21e190fc-3c6a-4499-9b6f-d1843a0c45ff)
 
 
-<img src="https://github.com/plashdof/molecatch_Kotlin/assets/86242930/21e190fc-3c6a-4499-9b6f-d1843a0c45ff">
+### 출력함수 만들기
+
+고정폭 글꼴 적용했음에도, 칸배열이 미세하게 안맞는 문제 발생
+
+![출력함수만들기](https://github.com/plashdof/Easytask_Kotlin/assets/86242930/e7672211-7da5-408d-b142-63e290ef48ae)
 
 
 ## 학습메모
 
 ---
+

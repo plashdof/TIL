@@ -1,6 +1,6 @@
 
 // 행 6 열 11 짜리 2차원배열 초기화
-val answer = Array(11) { Array(6) { "xxxx" } }
+val answer = Array(11) { Array(5) { "    " } }
 
 fun main(){
     var input = readln()
@@ -10,14 +10,30 @@ fun main(){
     val datas = stringToArray(input)
     insertData(datas)
 
+    printTable()
+
+
+}
+
+fun printTable(){
+    println("|시간| 월 | 화 | 수 | 목 | 금 |")
+    println("-------------------------------")
+    var time = 9
     for(i in 0 until 11){
-        for(j in 0 until 6){
-            print(answer[i][j])
+        if(time == 9){
+            print("| 09 |")
+        }else{
+            print("| $time |")
+        }
+        time++
+        for(j in 0 until 5){
+            print(answer[i][j] + "|")
         }
         println()
     }
-
+    println("-------------------------------")
 }
+
 
 // 입력값 ArrayList로 변환해주는 함수
 fun stringToArray(s : String) : ArrayList<String>{
@@ -65,13 +81,11 @@ fun timeParsing(s : String) : IntArray {
     val erow = time.substring(3,5).toInt() - 10  // 끝나는시간 전칸까지만 표시하므로 10뺴주기
     var col = 0
     when(time[0]){
-        'M' -> {col = 1}
-        'T' -> {col = 2}
-        'W' -> {col = 3}
-        'H' -> {col = 4}
-        'F' -> {col = 5}
+        'M' -> {col = 0}
+        'T' -> {col = 1}
+        'W' -> {col = 2}
+        'H' -> {col = 3}
+        'F' -> {col = 4}
     }
     return intArrayOf(col, srow, erow)
 }
-
-
