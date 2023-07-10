@@ -177,7 +177,50 @@ fun parsingDatas(datas : ArrayList<String>){
 
 ### 예외처리3 시간표 겹쳤을때 하단 별도출력
 
+겹치는 시간표는 함수를 구현하여 판별하였다
+
+
+```kotlin
+
+fun parsingDatas(datas : ArrayList<String>){
+
+    for(i in 0 until datas.size step 2){
+
+        // arr[0] : col / arr[1] : srow / arr[2] : erow
+        val arr = timeParsing(datas[i])
+        val name = datas[i+1]
+
+        ...
+
+        if(checkDupli(arr,name)){
+            continue
+        }
+    }
+}
+
+
+// 중복데이터인지 체크하는 함수
+fun checkDupli(arr : IntArray, name : String) : Boolean {
+    for(i in arr[1] until arr[2]+1 ) {
+        if (answer[i][arr[0]].isNotBlank()) {
+            inputExtraDatas(arr,name)
+            return true
+        }
+    }
+    return false
+}
+
+```
+
+데이터를 Parsing 하는 과정에서, 후순위에 오는 데이터는 선순위에 오는 데이터가 삽입된 뒤에 parsing 되므로, 겹치는지 판별할수 있다. 
+
+checkDupli 함수를 통해, 메인테이블인 answer 에 해당 자리가 Blank가 아니라면, extra 테이블에 삽입시키는 inputExtraDatas를 실행시키고, true를 반환한다.
+
+true가 반환되면, Parsing 뒤에 이루어지는 mainTable 삽입이 이루어지지 않고, continue로 다음 for문이 진행되게 된다
+
+
 ![캡처2](https://user-images.githubusercontent.com/86242930/252275329-324dab42-2b64-4679-a29f-47203e40e73d.JPG)
+
 
 삽입함수는 총 두가지가 필요했다.
 
